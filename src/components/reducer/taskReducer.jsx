@@ -1,20 +1,20 @@
 export const initialState = {
     tasks: [
         {
-            taskName : "Checkin",
-            taskDescription : "LogIn to Payroll",
-            taskCompleted: false,
+            name : "Checkin",
+            description : "LogIn to Payroll",
+            isCompleted: false,
             
         },
         {
-            taskName : "Progress",
-            taskDescription : "Report every task done",
-            taskCompleted: false,
+            name : "Progress",
+            description : "Report every task done",
+            isCompleted: false,
         },
         {
-            taskName : "Ckeckout",
-            taskDescription : "Save hours and logout",
-            taskCompleted: false,
+            name : "Ckeckout",
+            description : "Save hours and logout",
+            isCompleted: true,
         }
     ],
     appIsBuffering: true,
@@ -31,62 +31,6 @@ export const taskReducer = (state,action) => {
             gameIsBuffering: true,
           };
     
-        case 'UPDATE_POKEMONS':
-          return {
-            ...state,
-            pokemons: action.payload,
-          };
-    
-        case 'DATA_FETCHED_SUCCESS':
-          return {
-            ...state,
-            pokemons: action.payload,
-            currentScore: 0,
-            gameIsBuffering: false,
-            error: '',
-    
-          };
-    
-        case 'DATA_FETCHED_FAILED':
-          return {
-            ...state,
-            gameIsBuffering: false,
-            error: action.payload,
-            gameEnded: false,
-    
-          };
-    
-        case 'SELECT_POKEMON': {
-          const selected = state.pokemons.find(pokemon => pokemon.id === action.payload);
-          if (state.selectedPokemonsID.includes(selected.id)) {
-            return {
-              ...state,
-              gameEnded: true,
-            }
-          }
-    
-          else {
-            const newCurrentScore = state.currentScore + 1;
-            const newBestScore = newCurrentScore > state.bestScore ? newCurrentScore : state.bestScore;
-            const gameEnded = newCurrentScore === state.pokemons.length;
-            return {
-              ...state,
-              selectedPokemonsID: [...state.selectedPokemonsID, selected.id],
-              currentScore: newCurrentScore,
-              bestScore: newBestScore,
-              gameEnded,
-            };
-          }
-        }
-    
-        case 'RESET_GAME':
-          return {
-            ...state,
-            currentScore: 0,
-            gameEnded: false,
-            selectedPokemonsID: [],
-            gameIsBuffering: true,
-          };
         default:
           return state;
       }

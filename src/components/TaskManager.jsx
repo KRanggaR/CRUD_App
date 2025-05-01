@@ -2,6 +2,8 @@ import React from 'react'
 import '../styles/taskManager.css'
 import Search from './Search'
 import Button from './Button'
+import TaskList from './TaskList'
+
 import { Plus } from 'lucide-react';
 
 
@@ -23,7 +25,7 @@ export default function TaskManager() {
                     </div>
                 </div>
                     <div className="task_items">
-                        
+                        <TaskList />
                     </div>
             </div>
         </>

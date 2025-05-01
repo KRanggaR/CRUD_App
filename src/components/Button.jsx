@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/button.css'
 import { Plus } from 'lucide-react';
 
-export default function Button({ backgroundColor = 'black', text = 'click me', onClick, type = 'taskButton', Icon}) {
+function Button({ backgroundColor = 'black', text = 'click me', onClick, type = 'taskButton', Icon}) {
     const buttonStyle = {
         color: 'white',
         text: text,
@@ -29,3 +29,7 @@ export default function Button({ backgroundColor = 'black', text = 'click me', o
         </>
     )
 }
+
+export default Button;
+
+
