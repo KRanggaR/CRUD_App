@@ -1,0 +1,27 @@
+.header_button {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 4rem;
+    border-radius: 0.3rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.header_button:hover, .task_button:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.351);
+}
+
+.task_button {
+    display: flex;
+    align-items: center;
+    padding: 0.4rem;
+    border-radius: 0.3rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: 0.3s;
+}

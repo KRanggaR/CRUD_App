@@ -1,0 +1,15 @@
+.task_container{
+    margin: 2rem 2rem 0rem 2rem;
+}
+
+.task_header_title{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.task_headers_operations{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
