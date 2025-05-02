@@ -1,0 +1,68 @@
+.newTask-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.4); /* dark transparent backdrop */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newTask-container {
+    background-color: #fff;
+    width: 40%;
+    max-width: 600px;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+
+.newTask-detail-box {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
+
+.newTask-header-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.newTask-name-box,
+.newTask-description-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.newTask-name-box input,
+.newTask-description-box textarea {
+    background-color: #e3edf7;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.newTask-description-box textarea {
+    min-height: 6rem;
+    resize: vertical;
+}
+
+.newTask-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+
+}
