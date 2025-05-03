@@ -3,7 +3,7 @@ export const initialState = {
         {
             name: "Checkin",
             description: "LogIn to Payroll",
-            isCompleted: false,
+            isCompleted: true,
 
         },
         {
@@ -14,11 +14,13 @@ export const initialState = {
         {
             name: "Ckeckout",
             description: "Save hours and logout",
-            isCompleted: true,
+            isCompleted: false,
         }
     ],
-    appIsBuffering: true,
+    appIsBuffering: false,
     showAddTask: false,
+    showViewTask: false,
+    currentViewIndex: null,
     error: '',
 };
 
@@ -56,6 +58,13 @@ export const taskReducer = (state, action) => {
                 showAddTask: !state.showAddTask,
             };
 
+            case 'TOGGLE_VIEWTASK_BOX':
+            return {
+                ...state,
+                showViewTask: !state.showViewTask,
+                currentViewIndex: action.payload && 'index' in action.payload ? action.payload.index : null,
+            };
+
         case 'ADD_TASK': {
             const newTask = {
                 name: action.payload.name,
@@ -72,7 +81,7 @@ export const taskReducer = (state, action) => {
         case 'CANCEL_TASK':
             return {
                 ...state,
-                showAddTask: false
+                showAddTask: false,
             }
 
         case 'DELETE_TASK': {

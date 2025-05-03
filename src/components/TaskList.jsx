@@ -6,17 +6,21 @@ import Button from './Button';
 export default function TaskList({ state, dispatch }) {
     const { tasks } = state;
     const allCompleted = tasks.every(task => task.isCompleted);
-    
-    const viewTask = (idx) => {
 
+    const viewTask = (idx) => {
+        dispatch({
+            type: 'TOGGLE_VIEWTASK_BOX',
+            payload: { index: idx },
+        });
     }
+
     const editTask = (idx) => {
 
     }
     const deleteTask = (idx) => {
         dispatch({
             type: 'DELETE_TASK',
-            payload: {index:idx},
+            payload: { index: idx },
         })
     }
 
@@ -27,12 +31,12 @@ export default function TaskList({ state, dispatch }) {
                 <table className="styled-table">
                     <thead>
                         <tr className="table-header">
-                        
+
                             <th><input
                                 type="checkbox"
                                 checked={allCompleted}
                                 onChange={() => {
-                                    dispatch({ type: 'TOGGLE_ALL_TASK_COMPLETION'})
+                                    dispatch({ type: 'TOGGLE_ALL_TASK_COMPLETION' })
                                 }} /></th>
                             <th>Name</th>
                             <th>Description</th>
@@ -52,11 +56,14 @@ export default function TaskList({ state, dispatch }) {
                                 <td>{task.name}</td>
                                 <td>{task.description}</td>
                                 <td>
-                                    <Button
-                                        backgroundColor={task.isCompleted === true ? "#00b894" : "#db3031"}
-                                        text={task.isCompleted === true ? "Done" : "Not Done"}
-                                        Icon={task.isCompleted === true ? Check : X}
-                                        type="taskButton" />
+                                    <div className="status-button-wrapper">
+                                        <Button
+                                            backgroundColor={task.isCompleted ? "#00b894" : "#db3031"}
+                                            text={task.isCompleted ? "Done" : "Not Done"}
+                                            Icon={task.isCompleted ? Check : X}
+                                            type="taskButton"
+                                        />
+                                    </div>
                                 </td>
                                 <td className="action-buttons">
                                     <Button backgroundColor="#447fcd" text="View Task" Icon={Eye} onClick={() => viewTask(idx)} type="taskButton" />

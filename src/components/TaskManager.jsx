@@ -7,6 +7,7 @@ import { taskReducer, initialState } from './reducer/taskReducer';
 
 import { Plus } from 'lucide-react';
 import AddTask from './AddTask'
+import ViewTask from './ViewTask'
 
 export default function TaskManager() {
 
@@ -28,6 +29,13 @@ export default function TaskManager() {
             
     }
 
+    const closeViewTask = () => {
+        dispatch({
+            type: 'TOGGLE_VIEWTASK_BOX'
+        })
+            
+    }
+
     return (
         <>
             <div className="task_container">
@@ -37,6 +45,16 @@ export default function TaskManager() {
                             tasktype_text="Add New Task"
                             addTask={handleSaveTask}
                             cancelTask={closeAddTask}
+                        />
+                    </div>
+                )}
+                {/* View Task */}
+                {state.showViewTask && (
+                    <div className="task_popup_overlay">
+                        <ViewTask
+                            tasktype_text="Task Details"
+                            closeViewTask={closeViewTask}
+                            task={state.tasks[state.currentViewIndex]}
                         />
                     </div>
                 )}

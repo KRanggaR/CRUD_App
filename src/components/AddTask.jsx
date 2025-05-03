@@ -34,7 +34,7 @@ function AddTask({ tasktype_text, addTask, cancelTask }) {
                         <textarea
                             name="taskDescription"
                             value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            onChange={(e) => setDescription(e.target.value)} 
                         ></textarea>
 
 
