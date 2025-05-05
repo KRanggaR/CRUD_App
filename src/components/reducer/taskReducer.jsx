@@ -12,20 +12,42 @@ export const initialState = {
             isCompleted: false,
         },
         {
-            name: "Ckeckout",
+            name: "Checkout",
             description: "Save hours and logout",
+            isCompleted: true,
+        },
+        {
+            name: "Maintain Report",
+            description: "Project Report Maintainence and submission",
+            isCompleted: false,
+        },
+        {
+            name: "Scrum",
+            description: "Attended Daily Scrum (30mins)",
+            isCompleted: true,
+        },
+        {
+            name: "Meet",
+            description: "Project Meet at 16:00",
             isCompleted: false,
         }
     ],
-    appIsBuffering: false,
-    showAddTask: false,
-    showViewTask: false,
-    currentViewIndex: null,
-    error: '',
+    modalType: null, // 'add' | 'view' | 'edit' | null
+    currentElementIndex: null,
+    searchQuery: "",
 };
 
 export const taskReducer = (state, action) => {
     switch (action.type) {
+
+
+        case 'SET_SEARCH_QUERY':
+            return {
+                ...state,
+                searchQuery: action.payload
+            };
+
+        // marking check boxes all or none
         case 'TOGGLE_ALL_TASK_COMPLETION': {
             const completeAll = !state.tasks.every(task => task.isCompleted);
             const updatedTasks = state.tasks.map(task => ({
@@ -38,7 +60,7 @@ export const taskReducer = (state, action) => {
             };
         }
 
-
+        // marking individual check boxes 
         case 'TOGGLE_TASK_COMPLETION': {
             const updatedTask = state.tasks.map((task, index) => {
                 if (index === action.payload.index) {
@@ -52,38 +74,45 @@ export const taskReducer = (state, action) => {
             }
         }
 
-        case 'TOGGLE_TASK_BOX':
+
+        case 'TOGGLE_MODAL':
             return {
                 ...state,
-                showAddTask: !state.showAddTask,
+                modalType: action.payload?.type ?? null,
+                currentElementIndex: action.payload?.index ?? null
             };
 
-            case 'TOGGLE_VIEWTASK_BOX':
+
+        // saving new task to state 
+        case 'ADD_TASK':
             return {
                 ...state,
-                showViewTask: !state.showViewTask,
-                currentViewIndex: action.payload && 'index' in action.payload ? action.payload.index : null,
+                tasks: [...state.tasks, {
+                    name: action.payload.name,
+                    description: action.payload.description,
+                    isCompleted: false
+                }],
+                modalType: null
             };
 
-        case 'ADD_TASK': {
-            const newTask = {
-                name: action.payload.name,
-                description: action.payload.description,
-                isCompleted: false
-            };
+
+        case 'SAVE_EDIT_TASK': {
+            const { name, description, index } = action.payload;
+            const updatedTasks = state.tasks.map((task, i) => {
+                if (i === index) {
+                    return { ...task, name, description, isCompleted: false };
+                }
+                return task;
+            });
             return {
                 ...state,
-                tasks: [...state.tasks, newTask],
-                showAddTask: false
+                tasks: updatedTasks,
+                modalType: null,
+                currentElementIndex: null,
             };
         }
 
-        case 'CANCEL_TASK':
-            return {
-                ...state,
-                showAddTask: false,
-            }
-
+        // Delete task from list
         case 'DELETE_TASK': {
             const updatedTask = state.tasks.filter((_, index) => index !== action.payload.index);
             return {
