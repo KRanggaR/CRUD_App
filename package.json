@@ -1,9 +1,9 @@
 {
   "name": "crud-app",
+  "homepage": "https://kranggar.github.io/CRUD_App/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://kranggar.github.io/CRUD_App/",
   "scripts": {
     "start": "vite",
     "dev": "vite",
@@ -14,6 +14,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "gh-pages": "^6.3.0",
     "lucide-react": "^0.503.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
